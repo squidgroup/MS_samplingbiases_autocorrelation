@@ -1,0 +1,171 @@
+---
+title: "Untitled"
+author: "Hassen Allegue"
+date: "12/13/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r include=FALSE}
+
+# load libraries and read data
+library(data.table)
+library(ggplot2)
+
+NR <- 10
+data_file_path_in  <- paste0("C:/Users/HASSEN/Documents/MS3_squid_data/fit_model_data/MS3_fit_model_data_NR_", NR,".csv")
+param_file_path_in <- paste0("C:/Users/HASSEN/Documents/MS3_squid_data/simulated_data/MS3_parameters_NR_", NR,".csv")
+
+fit_data <- fread(data_file_path_in)
+# setnames(fit_data, c("Ve"), c("Vw"))
+
+parameters <- fread(param_file_path_in)
+setnames(parameters, c("VI", "Ve"), c("VI_true", "Ve_true"))
+
+# combine fitted results and input parameters 
+setkey(fit_data, Sim_id); setkey(parameters, Sim_id);
+fit_data <- merge(fit_data, parameters[ , .(VI_true, Ve_true, e_corr, Vhsi, X1_sto_shared, X1_sto_corr, X1_lin_state, X1_cyc_state, VE, Sim_id)], by="Sim_id")
+
+
+
+fit_data <- melt(fit_data, id.vars = c("Sim_id", "Replicate", "Model", "VI_true", "Ve_true", "e_corr", "Vhsi", "X1_sto_shared", "X1_sto_corr", "X1_lin_state", "X1_cyc_state", "VE"), measure.vars = c("VI", "Ve"))
+
+
+fit_data[ , X1_lin_state  := factor(ifelse(X1_lin_state, "Linear", "Not linear"), levels = c("Not linear", "Linear"))]
+fit_data[ , X1_cyc_state  := factor(ifelse(X1_cyc_state, "Cyclic", "Not cyclic"), levels = c("Not cyclic", "Cyclic"))]
+fit_data[ , X1_sto_shared := factor(ifelse(X1_sto_shared, "Shared", "Unshared"), c("Shared", "Unshared"))]
+
+setnames(fit_data, c("variable", "value"), c("variable_est", "value_est"))
+
+fit_data[variable_est == "VI",  value_true := VI_true]
+fit_data[variable_est == "Ve",  value_true := Ve_true]
+
+
+fit_data[ , VI_true_string := paste0("VI = ", VI_true)]
+
+fit_data[variable_est == "Ve", Vw_true := VE + value_true]
+
+
+# fit_data[ , Vw_true := 1 - VI_true]
+# fit_data[variable_est == "Vw", value_true := Vw_true]
+
+fit_data[ , Model := factor(Model, levels = c("null", 
+                                              "time.fixed",
+                                              "time.random",
+                                              "Id.period.random",
+                                              "time_between_mc",
+                                              "time_within_mc",
+                                              "time_between_within_mc",
+                                              "lme.corAR1",
+                                              "lme.corExp"))]
+
+```
+
+
+```{r plot-function, message=FALSE, warning=FALSE, include=FALSE}
+
+plot_fig <- function(dt, corr="X1_sto_corr", corr_label="Autocorrelation in X"){
+
+  p <- ggplot(data = dt, aes(x=as.factor(Vhsi), y=value_est, color=as.factor(dt[[corr]]))) +
+          geom_boxplot() + 
+          geom_hline(aes(yintercept  = value_true)) +
+          geom_hline(aes(yintercept  = Vw_true), linetype="dotted", color="red") +
+          facet_grid(Model ~ VI_true_string + variable_est) +
+          scale_color_discrete(name = corr_label) +
+          ylab("Variance value") + xlab("Among-individual variance in sampling") +
+          theme_bw() + 
+          theme(legend.position = "top",
+                strip.text.y    = element_text(size = 8),
+                axis.text.x     = element_text(angle = 67.5, hjust = 1, size = 7))
+  
+  print(p)
+}
+
+```
+
+
+# Shared / X stochastic / No correlation in residuals
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height=15, fig.width=12}
+
+plot_fig(fit_data[X1_lin_state == "Not linear" & X1_cyc_state == "Not cyclic" & X1_sto_shared == "Shared" & e_corr == 0])
+
+```
+
+# Shared / X Linear / No correlation in residuals
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height=15, fig.width=12}
+
+plot_fig(fit_data[X1_lin_state == "Linear" & X1_cyc_state == "Not cyclic" & X1_sto_shared == "Shared" & e_corr == 0])
+
+```
+
+# Shared / X Cyclic / No correlation in residuals
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height=15, fig.width=12}
+
+plot_fig(fit_data[X1_lin_state == "Not linear" & X1_cyc_state == "Cyclic" & X1_sto_shared == "Shared" & e_corr == 0])
+
+```
+
+# Shared / X Linear and Cyclic / No correlation in residuals
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height=15, fig.width=12}
+
+plot_fig(fit_data[X1_lin_state == "Linear" & X1_cyc_state == "Cyclic" & X1_sto_shared == "Shared" & e_corr == 0])
+
+```
+
+# Unshared / X stochastic / No correlation in residuals
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height=15, fig.width=12}
+
+plot_fig(fit_data[X1_lin_state == "Not linear" & X1_cyc_state == "Not cyclic" & X1_sto_shared == "Unshared" & e_corr == 0])
+
+```
+
+# Unshared / X Linear / No correlation in residuals
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height=15, fig.width=12}
+
+plot_fig(fit_data[X1_lin_state == "Linear" & X1_cyc_state == "Not cyclic" & X1_sto_shared == "Unshared" & e_corr == 0])
+
+```
+
+# Unshared / X Cyclic / No correlation in residuals
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height=15, fig.width=12}
+
+plot_fig(fit_data[X1_lin_state == "Not linear" & X1_cyc_state == "Cyclic" & X1_sto_shared == "Unshared" & e_corr == 0])
+
+```
+
+# Unshared / X Linear and Cyclic / No correlation in residuals
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height=15, fig.width=12}
+
+plot_fig(fit_data[X1_lin_state == "Linear" & X1_cyc_state == "Cyclic" & X1_sto_shared == "Unshared" & e_corr == 0])
+
+```
+
+# Shared / X stochastic and without correlation / Correlation in residuals
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height=15, fig.width=12}
+
+plot_fig(fit_data[X1_lin_state == "Not linear" & X1_cyc_state == "Not cyclic" & X1_sto_shared == "Shared" & X1_sto_corr == 0], corr="e_corr", corr_label="Autocorrelation in residuals")
+
+```
+
+# Unshared / X stochastic and without correlation / Correlation in residuals
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height=15, fig.width=12}
+
+plot_fig(fit_data[X1_lin_state == "Not linear" & X1_cyc_state == "Not cyclic" & X1_sto_shared == "Unshared" & X1_sto_corr == 0], corr="e_corr", corr_label="Autocorrelation in residuals")
+
+```
+
+
+

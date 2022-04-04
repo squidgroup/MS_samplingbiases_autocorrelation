@@ -1,0 +1,77 @@
+---
+title: "Autocorrelation check"
+output: html_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r include=FALSE}
+
+# load libraries and read data
+library(data.table)
+library(ggplot2)
+library(nlme)
+library(lme4)
+
+NR <- 10
+path_in            <- "C:/Users/HASSEN/Documents/MS3_squid_data/simulated_data/"
+param_file_path_in <- paste0("C:/Users/HASSEN/Documents/MS3_squid_data/simulated_data/MS3_parameters_NR_", NR,".csv")
+parameters         <- fread(param_file_path_in)
+
+
+param_res <- parameters[e_corr == 0.9 & Vhsi == 0 & X1_sto_shared == FALSE]
+id_res    <- 200
+# id_res    <- 800
+dt_res    <- fread(paste0(path_in, "/NR_", NR, "/MS3_simulated_data_NR_",NR,"_SimIdRep_",id_res,".csv"))
+
+
+param_x <- parameters[X1_sto_corr == 0.9 & Vhsi == 0 & X1_sto_shared == FALSE]
+id_x    <- 1900
+# id_x    <- 2200
+dt_x    <- fread(paste0(path_in, "/NR_", NR, "/MS3_simulated_data_NR_",NR,"_SimIdRep_",id_x,".csv"))
+
+
+dt_x[ , Individual := factor(Individual)]
+
+
+```
+
+
+# autocorrelation in residuals
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height=4, fig.width=7}
+
+res0 <- lme4::lmer(Phenotype ~ 1 + (1|Individual), data = dt_res)
+res1 <- lme4::lmer(Phenotype ~ 1 + (1|Individual) + (1|Time), data = dt_res)
+res2 <- nlme::lme(Phenotype ~ 1, random = ~ 1|Individual, correlation=corAR1(form = ~ Time | Individual), data=dt_res)
+
+
+itsadug::acf_resid(res0)
+itsadug::acf_resid(res1)
+acf(residuals(res2, retype="normalized"))
+
+```
+
+
+# autocorrelation in X
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height=4, fig.width=7}
+
+
+
+x0 <- lme4::lmer(Phenotype ~ 1 + (1|Individual), data = dt_x)
+x1 <- lme4::lmer(Phenotype ~ 1 + (1|Individual) + (1|Time), data = dt_x)
+x2 <- nlme::lme(Phenotype ~ 1 + Time, random = ~ 1|Individual, 
+                correlation=corAR1(value = 0, form = ~Time|Individual), data=dt_x, method ="REML")
+
+library(glmmTMB)
+dt_x[ , Time := factor(Time)]
+x3 <- glmmTMB(Phenotype ~ 1 + (1|Individual) + ar1(Time - 1|Individual), data = dt_x)
+
+itsadug::acf_resid(x0)
+itsadug::acf_resid(x1)
+acf(residuals(x2, retype="normalized"))
+acf(residuals(x3, retype="normalized"))
+
+```
+
+
