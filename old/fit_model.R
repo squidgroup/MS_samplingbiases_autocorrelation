@@ -1,11 +1,11 @@
 library(dplyr)
 library(lme4)
 library(nlme)
+library(glmmTMB)
 library(data.table)
 library(doSNOW)
 library(foreach)
 library(doParallel)
-# library(iterators)
 
 NR            <- 10
 path_in       <- "C:/Users/HASSEN/Documents/MS3_squid_data/simulated_data/"
@@ -19,36 +19,29 @@ GRP         <- 1:(nrow(squid_param) * squid_param[1,NP])
 
 # function that analyses the data of each parameter combination and replicate
 fit_model <- function(dt){
+
+  # sim <- 350
+  # dt  <- fread(paste0(path_in, "/NR_", NR, "/MS3_simulated_data_NR_",NR,"_SimIdRep_",sim,".csv"))
   
-  # dt <- copy(squid_data)
+  ####
   
   dt$Individual <- as.factor(dt$Individual)
-  
-  dt <- dt %>% 
-          group_by(Individual)                        %>% 
-          mutate(Time_min    = min(Time))            %>% 
-          mutate(Time_dev    = Time - Time_min,
-                 Time_period = trunc(Time / 5) * 5)   %>%
-          mutate(Ind_period  = paste0(Individual, "_", Time_period))
+
+  # m0 <- lmer(Phenotype ~ 1 + (1|Individual), data = dt)
+  # m1 <- lmer(Phenotype ~ 1 + (1|Individual) + (1|Time), data = dt)
+  # 
+  # 
+  # acf(residuals(m0))
+  # acf(residuals(m1))
   
   # declare fitted models
   mm_list <- data.frame(Model    = c("null", 
                                      
-                                     "time.fixed",
-                                     "time.random",
-                                     
-                                     "time.min.centering",
-                                     
-                                     "Id.period.random"),
+                                     "time.random"),
                         
                         Model_eq = c("Phenotype ~ 1 + (1|Individual)",
-                                     
-                                     "Phenotype ~ 1 + factor(Time) + (1|Individual)",
-                                     "Phenotype ~ 1 + (1|Individual) + (1|Time)",
-                                     
-                                     "Phenotype ~ 1 + (1|Individual) + (1|Time_min) + (1|Time_dev)",
-                                     
-                                     "Phenotype ~ 1 + (1|Individual) + (1|Ind_period)"))
+                                     "Phenotype ~ 1 + (1|Individual) + (1|Time)"))
+
   
   fit_specific_model <- function(dt_model, dt_mm){
     
@@ -74,37 +67,54 @@ fit_model <- function(dt){
   
   ### AR1 function
   # fit model
-  mm   <- tryCatch(lme(Phenotype ~ 1, random = ~ 1|Individual,
-                       correlation=corAR1(form = ~ Time | Individual), data=dt), 
+  # mm   <- tryCatch(lme(Phenotype ~ 1, random = ~ 1|Individual,
+  #                      correlation=corAR1(form = ~ Time | Individual), data=dt),
+  #                  error = function(e){NULL})
+  
+  # mm.corAR1 <- data.frame("Model"    = as.character("corAR1"),
+  #                        "Sim_id"    = as.numeric(dt$Sim_id[1]),
+  #                        "Replicate" = as.numeric(dt$Replicate[1]),
+  # 
+  #                        # estimated parameters from the model fit
+  #                        "VI"  = ifelse(is.null(mm), NA, as.numeric(VarCorr(mm)[1])),
+  #                        "Ve"  = ifelse(is.null(mm), NA, as.numeric(VarCorr(mm)[2])),
+  #                        stringsAsFactors = FALSE)
+  
+  
+  dt[ , Time := factor(Time)]
+  mm   <- tryCatch(glmmTMB(Phenotype ~ 1 + (1|Individual) + ar1(Time - 1|Individual), data=dt),
                    error = function(e){NULL})
-    
-  mm.corAR1 <- data.frame("Model"    = as.character("lme.corAR1"),
+  
+  VI <- insight::get_variance_random(mm)
+  Ve <- insight::get_variance_residual(mm)
+  
+  mm.corAR1 <- data.frame("Model"    = as.character("corAR1"),
                          "Sim_id"    = as.numeric(dt$Sim_id[1]),
                          "Replicate" = as.numeric(dt$Replicate[1]),
-  
-                         # estimated parameters from the model fit
-                         "VI"  = ifelse(is.null(mm), NA, as.numeric(VarCorr(mm)[1])),
-                         "Ve"  = ifelse(is.null(mm), NA, as.numeric(VarCorr(mm)[2])), 
-                         stringsAsFactors = FALSE)
 
+                         # estimated parameters from the model fit
+                         "VI"  = ifelse(is.null(mm), NA, ifelse(is.null(VI), 0, VI)),
+                         "Ve"  = ifelse(is.null(mm), NA, ifelse(is.null(Ve), 0, Ve)),
+                         stringsAsFactors = FALSE)
+                         
   mm_res <- rbind(mm_res, mm.corAR1)
   
-  ### CorExp function
-  # fit model
-  mm   <- tryCatch(lme(Phenotype ~ 1, random = ~ 1|Individual,
-                       correlation=corExp(form = ~ Time | Individual), data=dt), 
-                   error = function(e){NULL})
-
-  mm.corExp <- data.frame("Model"     = as.character("lme.corExp"),
-                          "Sim_id"    = as.numeric(dt$Sim_id[1]),
-                          "Replicate" = as.numeric(dt$Replicate[1]),
-                          
-                          # estimated parameters from the model fit
-                          "VI"  = ifelse(is.null(mm), NA, as.numeric(VarCorr(mm)[1])),
-                          "Ve"  = ifelse(is.null(mm), NA, as.numeric(VarCorr(mm)[2])), 
-                          stringsAsFactors = FALSE)
-
-  mm_res <- rbind(mm_res, mm.corExp)
+  # ### CorExp function
+  # # fit model
+  # mm   <- tryCatch(lme(Phenotype ~ 1, random = ~ 1|Individual,
+  #                      correlation=corExp(form = ~ Time | Individual), data=dt), 
+  #                  error = function(e){NULL})
+  # 
+  # mm.corExp <- data.frame("Model"     = as.character("lme.corExp"),
+  #                         "Sim_id"    = as.numeric(dt$Sim_id[1]),
+  #                         "Replicate" = as.numeric(dt$Replicate[1]),
+  #                         
+  #                         # estimated parameters from the model fit
+  #                         "VI"  = ifelse(is.null(mm), NA, as.numeric(VarCorr(mm)[1])),
+  #                         "Ve"  = ifelse(is.null(mm), NA, as.numeric(VarCorr(mm)[2])), 
+  #                         stringsAsFactors = FALSE)
+  # 
+  # mm_res <- rbind(mm_res, mm.corExp)
   
   return(mm_res)
 
@@ -124,9 +134,8 @@ opts       <- list(progress = progress)
 tictoc::tic()
 
 results = as.data.table(foreach(sim = GRP, 
-                                .packages     = c("dplyr", "lme4", "nlme", "data.table"),
+                                .packages     = c("dplyr", "lme4", "nlme", "glmmTMB", "data.table", "insight"),
                                 .combine      = "rbind",
-                                # .multicombine = TRUE,
                                 .options.snow = opts) %dopar% {
                                   
                                   dt <- fread(paste0(path_in, "/NR_", NR,

@@ -1,0 +1,9 @@
+name|type|data|command|depend|seed|path|time|size|bytes|format|iteration|parent|children|seconds|warnings|error
+END|stem|29e8fdf6c0df61d9|86f859fdccbf0387|ef46db3751d8e999|-1119972010||t19088.2787599881s|ba7baa2be0c9b1c9|50|rds|vector|||0.54||
+s_param_5_FALSE|stem|847b3822c3ba60d6|49cc9bd3ffaf463e|2be030e387056836|-1579281889||t19088.3059783925s|82ad2fa806649fd9|1324|rds|vector|||0.59||
+s_param_5_TRUE|stem|279b7881c674bda8|9ae7d6814694d655|2be030e387056836|-805894111||t19088.305978949s|175ff29f810dee68|1315|rds|vector|||0||
+.Random.seed|object|3b0d763edb001f14||||||||||||||
+f_simulate_data|function|23e0239f7633f5c1||||||||||||||
+f_init_sim_param|function|624e946c8ba160c8||||||||||||||
+s_sim_5_FALSE|stem|5c37bbbbd4b6378d|8edb18f6daaf72a7|527b98346878adca|-203318804||t19088.3092689713s|846b4aaa350fd95d|125155|rds|vector|||15.03|already exporting variables run_simulation|
+s_sim_5_TRUE|stem|ae24609bfc502af7|8e03680891375029|f1a27ed7710f8265|-518592026||t19088.3094253651s|70fb4ec6a5fa5529|93446|rds|vector|||13.47|already exporting variables run_simulation|

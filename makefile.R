@@ -1,18 +1,35 @@
-tictoc::tic()
+source("R/packages/packages.R") # loads packages
+source("R/functions.R") # loads functions
 
-rm(list=ls())
+library(targets)
+library(tarchetypes)
 
-source("simulate_data.R")
+### Run targets
 
-rm(list=ls())
+# tar_watch(seconds = 10, outdated = FALSE, targets_only = TRUE)
 
-source("fit_model.R")
+tar_make()
+tar_meta(fields = error, complete_only = TRUE)
 
-rm(list=ls())
+### Check targets
 
-rmarkdown::render("display_results.Rmd")
-browseURL("display_results.html")
+# tar_manifest()
+# tar_glimpse()
+# tar_visnetwork()
+# tar_outdated()
 
-rm(list=ls())
 
-tictoc::toc()
+### Progress and report 
+
+# tar_progress()
+# tar_meta()
+
+# retrieve errors and warnings
+# tar_meta(fields = error, complete_only = TRUE)
+# tar_meta(fields = warnings, complete_only = TRUE)
+
+
+### Clean up local internal files 
+
+# tar_prune()
+# tar_destroy()

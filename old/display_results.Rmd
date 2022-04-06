@@ -1,0 +1,87 @@
+---
+title: "Figures"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r include=FALSE}
+
+# load libraries and read data
+library(data.table)
+library(ggplot2)
+
+NR <- 10
+data_file_path_in  <- paste0("C:/Users/HASSEN/Documents/MS3_squid_data/fit_model_data/MS3_fit_model_data_NR_", NR,".csv")
+param_file_path_in <- paste0("C:/Users/HASSEN/Documents/MS3_squid_data/simulated_data/MS3_parameters_NR_", NR,".csv")
+
+fit_data <- fread(data_file_path_in)
+# setnames(fit_data, c("Ve"), c("Vw"))
+
+parameters <- fread(param_file_path_in)
+setnames(parameters, c("VI", "Ve"), c("VI_true", "Ve_true"))
+
+# combine fitted results and input parameters 
+setkey(fit_data, Sim_id); setkey(parameters, Sim_id);
+fit_data <- merge(fit_data, parameters[ , .(VI_true, Ve_true, e_corr, X1_sto_corr, Vhsi, X1_sto_shared, Sim_id)], by="Sim_id")
+
+
+
+fit_data <- melt(fit_data, id.vars = c("Sim_id", "Replicate", "Model", "VI_true", "Ve_true", "e_corr", "X1_sto_corr", "X1_sto_shared", "Vhsi"), measure.vars = c("VI", "Ve"))
+
+setnames(fit_data, c("variable", "value"), c("variable_est", "value_est"))
+
+fit_data[variable_est == "VI",  value_true := VI_true]
+fit_data[variable_est == "Ve",  value_true := Ve_true]
+
+
+fit_data[ , Model := factor(Model, levels = c("null",
+                                              "time.random",
+                                              "corAR1"
+                                            ))]
+
+```
+
+
+```{r plot-function, message=FALSE, warning=FALSE, include=FALSE}
+
+plot_fig <- function(dt, corr="e_corr", corr_label="Autocorrelation"){
+
+  # corr <- "e_corr"
+  # corr_label <- "Autocorrelation"
+  # dt <- fit_data[arima == TRUE]
+  
+  ####
+  
+  p <- ggplot(data = dt, aes(x=as.factor(Vhsi), y=value_est, color=as.factor(dt[[corr]]))) +
+          geom_boxplot() + 
+          geom_hline(aes(yintercept  = value_true)) +
+          facet_grid(Model ~ variable_est + X1_sto_shared) +
+          scale_color_discrete(name = corr_label) +
+          ylab("Variance value") + xlab("Among-individual variance in sampling") +
+          theme_bw() + 
+          theme(legend.position = "top",
+                strip.text.y    = element_text(size = 8),
+                axis.text.x     = element_text(angle = 67.5, hjust = 1, size = 7))
+  
+  print(p)
+}
+
+```
+
+
+# autocorrelation in residuals
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height=7, fig.width=12}
+
+plot_fig(fit_data[e_corr > 0], corr="e_corr")
+
+```
+
+# autocorrelation in X
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height=7, fig.width=12}
+
+plot_fig(fit_data[X1_sto_corr > 0], "X1_sto_corr")
+
+```
