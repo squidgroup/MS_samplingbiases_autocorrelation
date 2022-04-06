@@ -30,7 +30,7 @@ f_simulate_data <- function(parameters){
     
     # Run simulation
     dt_list    <- squid::squidR(inputs, plot = TRUE)
-    dt_sampled <- as.data.table(dt_list$sampled_data)[ , .(Replicate, Individual, X1, Time)]
+    dt_sampled <- as.data.table(dt_list$sampled_data)[ , .(Phenotype, Replicate, Individual, Time)]
     
     # Add simulation ids to data.frame
     dt_sampled[ , Sim_id := inputs$Sim_id]

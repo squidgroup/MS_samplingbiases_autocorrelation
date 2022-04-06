@@ -1,8 +1,8 @@
 f_init_sim_param <- function(NI                   = 100,
-                             NP                   = 100,
+                             NP                   = 1,
                              NR                   = 5,
                              
-                             VI                   = c(0, 0.2, 0.4),
+                             VI                   = c(0, 0.4),
                              VS                   = 0,
                              Ve                   = 0.05,
                              
@@ -26,7 +26,8 @@ f_init_sim_param <- function(NI                   = 100,
                              X1_cyc_state         = c(TRUE, FALSE),
                              X1_cyc_shared        = c(TRUE),
                              X1_cyc_amplitude     = 2,
-                             X1_cyc_period        = 25){
+                             X1_cyc_period        = 25,
+                             Rep                  = 1){
   
   #########################################
   ### initiate simulation parameters ######
@@ -72,7 +73,6 @@ f_init_sim_param <- function(NI                   = 100,
   
   # add simulation id
   out[ , Sim_id := paste0(1:.N, "_NR", NR, "_shared", X1_sto_shared)]
-  
   
   return(out)
 }

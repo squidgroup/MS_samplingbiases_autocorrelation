@@ -1,9 +1,19 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|iteration|parent|children|seconds|warnings|error
 END|stem|29e8fdf6c0df61d9|86f859fdccbf0387|ef46db3751d8e999|-1119972010||t19088.2787599881s|ba7baa2be0c9b1c9|50|rds|vector|||0.54||
-s_param_5_FALSE|stem|847b3822c3ba60d6|49cc9bd3ffaf463e|2be030e387056836|-1579281889||t19088.3059783925s|82ad2fa806649fd9|1324|rds|vector|||0.59||
-s_param_5_TRUE|stem|279b7881c674bda8|9ae7d6814694d655|2be030e387056836|-805894111||t19088.305978949s|175ff29f810dee68|1315|rds|vector|||0||
-.Random.seed|object|3b0d763edb001f14||||||||||||||
-f_simulate_data|function|23e0239f7633f5c1||||||||||||||
-f_init_sim_param|function|624e946c8ba160c8||||||||||||||
-s_sim_5_FALSE|stem|5c37bbbbd4b6378d|8edb18f6daaf72a7|527b98346878adca|-203318804||t19088.3092689713s|846b4aaa350fd95d|125155|rds|vector|||15.03|already exporting variables run_simulation|
-s_sim_5_TRUE|stem|ae24609bfc502af7|8e03680891375029|f1a27ed7710f8265|-518592026||t19088.3094253651s|70fb4ec6a5fa5529|93446|rds|vector|||13.47|already exporting variables run_simulation|
+f_fit_null|function|eaae64f77058d3d2||||||||||||||
+out_path|stem|36be11501892156e|bd5ba7c252fadf11|ef46db3751d8e999|754978301||t19088.3841433716s|013d2ea9b87d37af|62|rds|vector|||0.97||
+s_param_5_FALSE|stem|d651de9541f97165|35b790a11e4417c9|56173b231b6d3f28|-1579281889||t19088.3850271348s|50300cf2b2216e2f|1124|rds|vector|||0.66||
+s_param_5_TRUE|stem|bd56adf946361dd9|b995881e3a22b8e2|56173b231b6d3f28|-805894111||t19088.3850286184s|083b6a622b522864|1111|rds|vector|||0||
+s_sim_5_FALSE|stem|2c81d1d93b9113be|8edb18f6daaf72a7|7d9e7205d8a808ae|-203318804||t19088.3851438784s|dd6b8ecf4a72f3e3|83583|rds|vector|||9.91|already exporting variables run_simulation|
+s_sim_5_TRUE|stem|402990353d9a15a5|8e03680891375029|dfb6e04f32c23645|-518592026||t19088.3853526737s|314271fa52c030c6|83577|rds|vector|||17.98|already exporting variables run_simulation|
+a_time_ran|stem|ba07711eb1c4f157|2f80732a16f6c6b5|5eecff5c2e33fc69|1873684555||t19088.3854596648s|aea64882c0789596|3424|rds|vector|||9.22||
+a_time_fix|stem|9b6be200640658d6|604e0e05f7cce417|5eecff5c2e33fc69|404034102||t19088.385515589s|a41041c2728a26f9|3365|rds|vector|||4.81||
+a_null|stem|ad4f0271298a6743|5fc120a867dc49a0|5eecff5c2e33fc69|-230764264||t19088.3855700512s|5553803efc5d3d4f|3436|rds|vector|||4.68||
+.Random.seed|object|a80e9cdbb1143ace||||||||||||||
+f_variance_figs|function|30019b1235c190dd||||||||||||||
+f_environment_figs|function|20489d36478e0a7a||||||||||||||
+f_fit_lmer|function|10950347591ff6de||||||||||||||
+f_simulate_data|function|fb42764df7096bc4||||||||||||||
+f_init_sim_param|function|26454545f1e85a1f||||||||||||||
+r_env_figs|stem|818395603511ae4c|f1d00a02b86e8790|8cde932764280d96|-1910342860||t19088.4144761599s|38b4028d392e454e|72991|rds|vector|||2.09||
+r_var_figs|stem|9f4c42ed28b5dda7|575065e5aa365f54|1309c1d0747c0a57|-485570799||t19088.414658886s|5e334b53539c3620|183098|rds|vector|||15.62|Removed 90 rows containing missing values geom_hline.|
