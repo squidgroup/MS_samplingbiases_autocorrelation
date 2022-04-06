@@ -1,5 +1,5 @@
 f_init_sim_param <- function(NI                   = 100,
-                             NP                   = 1,
+                             NP                   = 100,
                              NR                   = 5,
                              
                              VI                   = c(0, 0.4),
@@ -20,12 +20,12 @@ f_init_sim_param <- function(NI                   = 100,
                              X1_sto_corr          = c(0 , 0.4, 0.8),
                              
                              X1_lin_state         = c(TRUE, FALSE),
-                             X1_lin_slope         = 0.05,
+                             X1_lin_slope         = 0.15,
                              X1_lin_shared        = c(TRUE),
                              
                              X1_cyc_state         = c(TRUE, FALSE),
                              X1_cyc_shared        = c(TRUE),
-                             X1_cyc_amplitude     = 2,
+                             X1_cyc_amplitude     = 5,
                              X1_cyc_period        = 25,
                              Rep                  = 1){
   

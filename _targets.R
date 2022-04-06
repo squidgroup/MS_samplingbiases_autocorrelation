@@ -14,8 +14,8 @@ list(
   ##### SIMULATION ######################
   #++++++++++++++++++++++++++++++++++++++
   
-  tar_target(s_param_5_TRUE,         f_init_sim_param(NR=5, X1_sto_shared=TRUE,  NI=20, NP=1)),
-  tar_target(s_param_5_FALSE,        f_init_sim_param(NR=5, X1_sto_shared=FALSE, NI=20, NP=1)),
+  tar_target(s_param_5_TRUE,         f_init_sim_param(NR=5, X1_sto_shared=TRUE)),
+  tar_target(s_param_5_FALSE,        f_init_sim_param(NR=5, X1_sto_shared=FALSE)),
  
   tar_target(s_sim_5_TRUE,           f_simulate_data(s_param_5_TRUE)),
   tar_target(s_sim_5_FALSE,          f_simulate_data(s_param_5_FALSE)),
@@ -46,8 +46,6 @@ list(
                                                out_path)),
   
   tar_target(r_env_figs,       f_environment_figs(out_path)),
-  
-  
   
   
   tar_target(END, 0)

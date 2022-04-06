@@ -13,7 +13,7 @@ f_environment_figs <- function(path){
                 
                 "X1_sto_state"         = TRUE,
                 "X1_sto_shared"        = TRUE,
-                "X1_sto_V"             = 2, 
+                "X1_sto_V"             = 1, 
                 
                 "X1_sto_autocor_state" = TRUE,
                 "X1_sto_corr"          = c(0, 0.8),
