@@ -10,21 +10,25 @@ s_sim_5_TRUE|stem|ccd1e665b12c0a25|8e03680891375029|1fe33f44e6d504b7|-518592026|
 a_id_period|stem|acce6baa70e7ff53|8bc2443eb68fe377|b8ce277add65fb24|994650834||t19088.5884494882s|373eaf1058753f63|250817|rds|vector|||682.61|Model failed to converge with maxgrad  0.266418 tol  0.002, component 1|
 a_ar1|stem|1530bc9f2447bf22|d95b2554d95da63f|f8c5204c9a8084b6|765975871||t19088.6186248495s|52c15eca0cfec12d|260479|rds|vector|||2166.86||
 a_id_period2|stem|5b59839e1bd5f3d8|35090a14f1123d18|16ccf386e5928e13|297192492||t19089.2267988424s|35f035336c339564|265296|rds|vector|||977.23|Model failed to converge with maxgrad  0.00581377 tol  0.002, component 1|
-a_null|stem|bc1e0110b526b79d|5fc120a867dc49a0|3ff846dc6694acc6|-230764264||t19088.4275094522s|c1607122930ddda0|257531|rds|vector|||452.92||
 a_time_fix|stem|0541dc4efa3f7d6b|604e0e05f7cce417|3ff846dc6694acc6|404034102||t19088.4328791283s|b7b1d8fa3e55a040|250322|rds|vector|||463.89||
 a_time_fix_ran|stem|80a08a640fe580f6|a5455358581679da|3ff846dc6694acc6|-467553259||t19088.6336574969s|75460c0267191394|255845|rds|vector|||812.96|Model failed to converge degenerate  Hessian with 1 negative eigenvalues|
 a_time_mc|stem|4a79e4b4dd242b31|81918c2b97c57074|e0b316dae9afda57|-1889948831||t19088.6242476066s|6b3c5db33f0ea1c1|250444|rds|vector|||485.76|Model failed to converge with maxgrad  0.00253395 tol  0.002, component 1|
-a_time_ran|stem|5612103c02d99596|2f80732a16f6c6b5|3ff846dc6694acc6|1873684555||t19088.442040641s|9af9cc08904634b3|256321|rds|vector|||791.51|Model failed to converge with maxgrad  0.00221413 tol  0.002, component 1|
+a_time_ind2|stem|8f9995b3e6efe8b3|6c81adebeffc1e0d|16ccf386e5928e13|922010665||t19089.327889207s|6d641466f9bfc854|264295|rds|vector|||2320.46|Model failed to converge degenerate  Hessian with 1 negative eigenvalues|
 f_fit_lmer|function|10950347591ff6de||||||||||||||
 f_fit_nlme_ar1|function|c1f3d84cd44fff2f||||||||||||||
-.Random.seed|object|0c562c43a7702238||||||||||||||
-f_variance_figs|function|23bd98a11807555f||||||||||||||
+.Random.seed|object|3551f5fc5af11b48||||||||||||||
+f_variance_figs|function|f871bb9d27f761b3||||||||||||||
 f_environment_figs|function|deac4753e4f8e142||||||||||||||
-f_simulate_data|function|fb42764df7096bc4||||||||||||||
-f_init_sim_param|function|17db0f8753349730||||||||||||||
-f_fit_lmer_id_period|function|52eea335b9452c14||||||||||||||
+f_simulate_data|function|668dc5f82ad6d49f||||||||||||||
+f_init_sim_param|function|2a2c061b5af61552||||||||||||||
+f_fit_lmer_id_period|function|beba03bf26c1ff3b||||||||||||||
 f_fit_lmer_mc|function|2d10e77d8d3e385b||||||||||||||
 f_fit_lmer_id_period2|function|77887113e0ed3a4c||||||||||||||
-a_time_ind|stem|5ee650dd0a991cbd|6c6d39037b1afb56|b8ce277add65fb24|-1029442969||t19089.3010316551s|93d37cf94433f1db|251796|rds|vector|||1241.41|Model failed to converge with maxgrad  0.00230551 tol  0.002, component 1|
-a_time_ind2|stem|8f9995b3e6efe8b3|6c81adebeffc1e0d|16ccf386e5928e13|922010665||t19089.327889207s|6d641466f9bfc854|264295|rds|vector|||2320.46|Model failed to converge degenerate  Hessian with 1 negative eigenvalues|
-r_var_figs|stem|d6efb7b6dbf5f86d|96fd3094fb65c67e|0d68dea3a8b58d57|-485570799||t19089.328254333s|42b0fc6f1e200d06|8509747|rds|vector|||29.64|Removed 21000 rows containing missing values geom_hline.|
+s_param_FALSE|stem|d3cb746f4621c807|0e46d755a6bd683e|a81bc6a2897abdb9|40395598||t19089.4279818364s|776af5816ac78e7c|1115|rds|vector|||0.33||
+s_param_TRUE|stem|bbd8ec3c84ad2db8|4e89e29a6de843db|a81bc6a2897abdb9|-1116475045||t19089.4279823805s|083b6a622b522864|1111|rds|vector|||0.03||
+s_sim_FALSE|stem|e4e1b251c7999345|9d1127f073996046|aa8fb7269730b188|331299796||t19089.4287086381s|a52288111ad49136|75954365|rds|vector|||54.41|already exporting variables run_simulation|
+s_sim_TRUE|stem|7d798aaa8fc96ca3|385c351d30567548|602232bb44514a9e|-467485090||t19089.4294204412s|c14020cf1c94700e|75956150|rds|vector|||52.98|already exporting variables run_simulation|
+a_null|stem|3b7e6c71cf3eb009|5cd1c2d2872d4138|a7453aeffb230d8a|-230764264||t19089.430665432s|c8747aca373de3ef|2023|rds|vector|||107.39||
+a_time_ind|stem|11acc20bf2e1dc39|5018b11f3099b71b|ff2f137a5a5c22e2|-1029442969||t19089.443180017s|21b71124801c2099|1730|rds|vector|||1081.25|Model failed to converge with maxgrad  0.00417776 tol  0.002, component 1|
+a_time_ran|stem|2746c50ef7228b42|8273dc1741d4f9b4|a7453aeffb230d8a|1873684555||t19089.4463673015s|5f36e850327e96b6|2043|rds|vector|||275.36|Model failed to converge with maxgrad  0.00246851 tol  0.002, component 1|
+r_var_figs|stem|d6efb7b6dbf5f86d|f336ae1cf65e5f8b|32b7ba3a688c6c83|-485570799||t19089.328254333s||8509747|rds|vector|||0.48||Faceting variables must have at least one value
