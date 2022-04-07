@@ -1,6 +1,6 @@
 f_simulate_data <- function(parameters){
   
-  # parameters <- tar_read(s_param_5_TRUE)
+  parameters <- tar_read(s_param_5_TRUE)
   
   ########################
   ### load packages ######
@@ -17,6 +17,8 @@ f_simulate_data <- function(parameters){
   
   run_simulation <- function(param){
     
+    param <- parameters[1, ]
+    
     # Select simulation parameters and convert table to list
     inputs           <- as.list(param)
     
@@ -30,7 +32,12 @@ f_simulate_data <- function(parameters){
     
     # Run simulation
     dt_list    <- squid::squidR(inputs, plot = TRUE)
-    dt_sampled <- as.data.table(dt_list$sampled_data)[ , .(Phenotype, Replicate, Individual, Time)]
+    dt_sampled <- as.data.table(dt_list$sampled_data)[ , .(Phenotype, Replicate, Individual, Time, e)]
+    
+    # replicate samples per time and adjust residuals
+    dt_sampled <- dt_sampled[rep(1:.N, each=2)]
+    dt_sampled[ , Phenotype := Phenotype - e + rnorm(.N, 0, sqrt(inputs$Ve))]
+    dt_sampled[ , c("e", "e2") := NULL]
     
     # Add simulation ids to data.frame
     dt_sampled[ , Sim_id := inputs$Sim_id]

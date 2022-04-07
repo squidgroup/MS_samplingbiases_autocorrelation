@@ -28,13 +28,9 @@ f_variance_figs <- function(dat, param, path){
   
   dat[variable_est == "Vw", Vw_true := VE + value_true]
   
-  dat[ , Model := factor(Model, levels = c("null", 
-                                          "time_fix",
+  dat[ , Model := factor(Model, levels = c("null",
                                           "time_ran",
-                                          "time_ind",
-                                          "time_ind2",
-                                          "time_mc",
-                                          "ar1"))]
+                                          "time_ind"))]
   
   plot_fig <- function(dt, corr="X1_sto_corr", corr_label="Autocorrelation in X"){
     

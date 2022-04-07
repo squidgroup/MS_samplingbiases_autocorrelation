@@ -1,6 +1,7 @@
-f_init_sim_param <- function(NI                   = 100,
-                             NP                   = 100,
-                             NR                   = 5,
+f_init_sim_param <- function(NI                   = 30,
+                             NP                   = 30,
+                             NR                   = 10,
+                             Nrep                 = 2,
                              
                              VI                   = c(0, 0.4),
                              VS                   = 0,
@@ -9,6 +10,8 @@ f_init_sim_param <- function(NI                   = 100,
                              Vhsi                 = seq(0, 0.8, by=0.2),
                              ST_ind               = FALSE,
                              Tmax                 = 100,
+                             
+                             B1                   = 1,
                              
                              X1_state             = TRUE,
                              
@@ -37,6 +40,7 @@ f_init_sim_param <- function(NI                   = 100,
     expand.grid("NI"                   = NI,
                 "NP"                   = NP,
                 "NR"                   = NR,
+                "Nrep"                 = Nrep, 
                 
                 "VI"                   = VI,
                 "VS"                   = VS,
@@ -45,6 +49,8 @@ f_init_sim_param <- function(NI                   = 100,
                 "Vhsi"                 = Vhsi,
                 "ST_ind"               = ST_ind,
                 "Tmax"                 = Tmax,
+                
+                "B1"                   = B1,
                 
                 "X1_state"             = X1_state,
                 
@@ -68,7 +74,7 @@ f_init_sim_param <- function(NI                   = 100,
   out <- out[!(X1_lin_state == TRUE & X1_cyc_state == TRUE)]
   
   # calculate environmental effect variance
-  out$B1 <- sqrt(1 - (out$VI + out$VS + out$Ve))
+  # out$B1 <- sqrt(1 - (out$VI + out$VS + out$Ve))
   out$VE <- out$B1^2
   
   # add simulation id
