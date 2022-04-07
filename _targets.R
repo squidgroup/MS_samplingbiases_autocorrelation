@@ -38,7 +38,7 @@ list(
                                           "time_fix_ran",
                                           "Phenotype ~ 1 + scale(Time) + (1|Individual) + (1|Time)")),
   
-  tar_target(a_time_ind,      f_fit_lmer_id_period(rbind(s_sim_5_TRUE, s_sim_5_FALSE),
+  tar_target(a_time_ind,       f_fit_lmer_id_period(rbind(s_sim_5_TRUE, s_sim_5_FALSE),
                                              "time_ind",
                                              "Phenotype ~ 1 + (1|Individual) + (1|Period:Individual) + (1|Time)")),
   tar_target(a_time_ind2,      f_fit_lmer_id_period2(rbind(s_sim_5_TRUE, s_sim_5_FALSE),
