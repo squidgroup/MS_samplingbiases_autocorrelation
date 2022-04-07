@@ -1,7 +1,7 @@
 f_variance_figs <- function(dat, param, path){
   
-  # dat   <- rbind(tar_read(a_null), tar_read(a_time_fix), tar_read(a_time_ran))
-  # param <- rbind(tar_read(s_param_5_TRUE), tar_read(s_param_5_FALSE))
+  # dat   <- rbind(tar_read(a_null), tar_read(a_time_ran), tar_read(a_time_ind))
+  # param <- rbind(tar_read(s_param_TRUE), tar_read(s_param_FALSE))
   # path  <- tar_read(out_path)
   
   ####

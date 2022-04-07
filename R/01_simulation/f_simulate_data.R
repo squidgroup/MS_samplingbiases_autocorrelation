@@ -1,6 +1,6 @@
 f_simulate_data <- function(parameters){
   
-  parameters <- tar_read(s_param_5_TRUE)
+  # parameters <- tar_read(s_param_5_TRUE)
   
   ########################
   ### load packages ######
@@ -17,7 +17,7 @@ f_simulate_data <- function(parameters){
   
   run_simulation <- function(param){
     
-    param <- parameters[1, ]
+    # param <- parameters[1, ]
     
     # Select simulation parameters and convert table to list
     inputs           <- as.list(param)
