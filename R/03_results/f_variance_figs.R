@@ -31,9 +31,8 @@ f_variance_figs <- function(dat, param, path){
   dat[ , Model := factor(Model, levels = c("null", 
                                           "time_fix",
                                           "time_ran",
-                                          "time_fix_ran",
-                                          "time_id_period",
-                                          "time_id_period2",
+                                          "time_ind",
+                                          "time_ind2",
                                           "time_mc",
                                           "ar1"))]
   
