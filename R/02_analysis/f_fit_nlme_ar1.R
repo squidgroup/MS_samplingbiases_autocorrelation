@@ -1,4 +1,4 @@
-f_fit_nlme_ar1 <- function(){
+f_fit_nlme_ar1 <- function(dat, mlabel, fformula){
   
   # dat      <- rbind(tar_read(s_sim_5_TRUE), tar_read(s_sim_5_FALSE))
   # mlabel   <- "ar1"

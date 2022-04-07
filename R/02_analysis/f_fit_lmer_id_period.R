@@ -1,4 +1,4 @@
-f_fit_lmer_id_period <- function(){
+f_fit_lmer_id_period <- function(dat, mlabel, fformula){
   
   # dat      <- rbind(tar_read(s_sim_5_TRUE), tar_read(s_sim_5_FALSE))
   # mlabel   <- "time_id_period"
