@@ -1,6 +1,6 @@
 f_fit_lmer_id_period <- function(dat, mlabel, fformula){
   
-  # dat      <- rbind(tar_read(s_sim_5_TRUE), tar_read(s_sim_5_FALSE))
+  # dat      <- rbind(tar_read(s_sim_TRUE), tar_read(s_sim_FALSE))
   # mlabel   <- "time_id_period"
   # fformula <- "Phenotype ~ 1 + (1|Individual) + (1|Time) + (1|Time:Individual)"
   

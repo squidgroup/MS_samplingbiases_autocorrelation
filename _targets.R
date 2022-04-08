@@ -40,6 +40,17 @@ list(
   
   
   
+  tar_target(a_time_ran_all,   f_fit_lmer(rbind(s_sim_TRUE, s_sim_FALSE),
+                                          "time_ran_all",
+                                          "Phenotype ~ 1 + (1|Individual) + (1|Time)")),
+  
+  tar_target(a_time_ind_all,   f_fit_lmer(rbind(s_sim_TRUE, s_sim_FALSE),
+                                          "time_ran_all",
+                                          "Phenotype ~ 1 + (1|Individual) + (1|Time) + (1|Time:Individual)")),
+  
+  
+  
+  
   
   # tar_target(a_time_fix,       f_fit_lmer(rbind(s_sim_5_TRUE, s_sim_5_FALSE),
   #                                         "time_fix",
