@@ -33,20 +33,10 @@ list(
                                           "time_ran",
                                           "Phenotype ~ 1 + (1|Individual) + (1|Time)")),
 
-  tar_target(a_time_ind,       f_fit_lmer_id_period(rbind(s_sim_TRUE, s_sim_FALSE),
+  tar_target(a_time_ind,       f_fit_lmer(rbind(s_sim_TRUE, s_sim_FALSE),
                                           "time_ind",
                                           "Phenotype ~ 1 + (1|Individual) + (1|Time) + (1|Time:Individual)")),
   
-  
-  
-  
-  tar_target(a_time_ran_all,   f_fit_lmer(rbind(s_sim_TRUE, s_sim_FALSE),
-                                          "time_ran_all",
-                                          "Phenotype ~ 1 + (1|Individual) + (1|Time)")),
-  
-  tar_target(a_time_ind_all,   f_fit_lmer(rbind(s_sim_TRUE, s_sim_FALSE),
-                                          "time_ran_all",
-                                          "Phenotype ~ 1 + (1|Individual) + (1|Time) + (1|Time:Individual)")),
   
   
   
@@ -76,11 +66,11 @@ list(
   
   tar_target(out_path,       "./output"),
   
-  tar_target(r_var_figs,       f_variance_figs(rbind(a_null,
-                                                     a_time_ran,
-                                                     a_time_ind),
-                                               rbind(s_param_TRUE, s_param_FALSE),
-                                               out_path)),
+  # tar_target(r_var_figs,       f_variance_figs(rbind(a_null,
+  #                                                    a_time_ran,
+  #                                                    a_time_ind),
+  #                                              rbind(s_param_TRUE, s_param_FALSE),
+  #                                              out_path)),
   
   tar_target(r_env_figs,       f_environment_figs(out_path)),
   

@@ -1,5 +1,5 @@
-f_init_sim_param <- function(NI                   = 30,
-                             NP                   = 30,
+f_init_sim_param <- function(NI                   = 50,
+                             NP                   = 50,
                              NR                   = 10,
                              Nrep                 = 2,
                              
