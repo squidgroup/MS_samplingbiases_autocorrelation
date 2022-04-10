@@ -37,8 +37,14 @@ list(
                                           "time_ind",
                                           "Phenotype ~ 1 + (1|Individual) + (1|Time) + (1|Time:Individual)")),
   
+
   
   
+  
+  
+  
+  
+  # add time fixe + corAR1
   
   
   
@@ -48,13 +54,6 @@ list(
   # tar_target(a_time_fix_ran,   f_fit_lmer(rbind(s_sim_5_TRUE, s_sim_5_FALSE),
   #                                         "time_fix_ran",
   #                                         "Phenotype ~ 1 + scale(Time) + (1|Individual) + (1|Time)")),
-  
-  # tar_target(a_time_ind2,      f_fit_lmer_id_period2(rbind(s_sim_5_TRUE, s_sim_5_FALSE),
-  #                                            "time_ind2",
-  #                                            "Phenotype ~ 1 + (1|Individual) + (1|Time_period:Individual) + (1|Time)")),
-  # tar_target(a_time_mc,        f_fit_lmer_mc(rbind(s_sim_5_TRUE, s_sim_5_FALSE),
-  #                                            "time_mc",
-  #                                            "Phenotype ~ 1 + scale(Time_mean) + scale(Time_dev) + (1|Individual)")),
   
   # tar_target(a_ar1,            f_fit_nlme_ar1(rbind(s_sim_5_TRUE, s_sim_5_FALSE),
   #                                            "ar1",
@@ -66,11 +65,12 @@ list(
   
   tar_target(out_path,       "./output"),
   
-  # tar_target(r_var_figs,       f_variance_figs(rbind(a_null,
-  #                                                    a_time_ran,
-  #                                                    a_time_ind),
-  #                                              rbind(s_param_TRUE, s_param_FALSE),
-  #                                              out_path)),
+  tar_target(r_var_figs,       f_variance_figs(data.table::rbindlist(list(a_null, 
+                                                                          a_time_ran, 
+                                                                          a_time_ind), 
+                                                                     fill=TRUE),
+                                               rbind(s_param_TRUE, s_param_FALSE),
+                                               out_path)),
   
   tar_target(r_env_figs,       f_environment_figs(out_path)),
   

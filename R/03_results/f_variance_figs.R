@@ -1,6 +1,8 @@
 f_variance_figs <- function(dat, param, path){
   
-  # dat   <- rbind(tar_read(a_null), tar_read(a_time_ran), tar_read(a_time_ind))
+  # dat   <- data.table::rbindlist(list(tar_read(a_null), 
+  #                                     tar_read(a_time_ran), 
+  #                                     tar_read(a_time_ind)), fill=TRUE)
   # param <- rbind(tar_read(s_param_TRUE), tar_read(s_param_FALSE))
   # path  <- tar_read(out_path)
   
@@ -8,8 +10,9 @@ f_variance_figs <- function(dat, param, path){
   
   path <- file.path(path, "manuscript", "figures")
   
-  
   setnames(param, c("VI", "Ve"), c("VI_true", "Ve_true"))
+  setnames(dat, c("V_Individual", "V_Residual"), c("VI", "Vw"))
+  
   
   # combine parameters estimate values and true values 
   dat <- merge(dat, param[ , .(VI_true, Ve_true, Vhsi, X1_sto_shared, X1_sto_corr, 
