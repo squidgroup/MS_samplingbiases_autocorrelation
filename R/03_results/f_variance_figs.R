@@ -1,8 +1,11 @@
 f_variance_figs <- function(dat, param, path){
   
-  # dat   <- data.table::rbindlist(list(tar_read(a_null), 
-  #                                     tar_read(a_time_ran), 
-  #                                     tar_read(a_time_ind)), fill=TRUE)
+  # dat   <- data.table::rbindlist(list(tar_read(a_null),
+  #                                     tar_read(a_time_ran),
+  #                                     tar_read(a_time_fix),
+  #                                     tar_read(a_time_ind),
+  #                                     tar_read(a_ar1),
+  #                                     tar_read(a_ar1_ind)), fill=TRUE)
   # param <- rbind(tar_read(s_param_TRUE), tar_read(s_param_FALSE))
   # path  <- tar_read(out_path)
   
@@ -11,7 +14,7 @@ f_variance_figs <- function(dat, param, path){
   path <- file.path(path, "manuscript", "figures")
   
   setnames(param, c("VI", "Ve"), c("VI_true", "Ve_true"))
-  setnames(dat, c("V_Individual", "V_Residual"), c("VI", "Vw"))
+  setnames(dat, c("Individual_sd__(Intercept)", "Residual_sd__Observation"), c("VI", "Vw"))
   
   
   # combine parameters estimate values and true values 
@@ -31,18 +34,19 @@ f_variance_figs <- function(dat, param, path){
   
   dat[variable_est == "Vw", Vw_true := VE + value_true]
   
-  dat[ , Model := factor(Model, levels = c("null",
-                                          "time_ran",
-                                          "time_ind"))]
+  dat[ , Model := factor(Model, 
+                         levels = c("null", "time_fix", "time_ran", "time_ind", "ar1", "ar1_ind"),
+                         labels = c("null", "time.fix", "time.ran", "time:ind.ran", "ar1.time", "ar1.time|ind"))]
   
-  plot_fig <- function(dt, corr="X1_sto_corr", corr_label="Autocorrelation in X"){
+  
+  plot_fig <- function(dt, corr="X1_sto_corr", corr_label="Autocorrelation in X (rho)"){
     
     ggplot(data = dt, aes(x=as.factor(Vhsi), y=value_est, color=as.factor(dt[[corr]]))) +
       geom_boxplot() + 
-      geom_hline(aes(yintercept  = value_true)) +
-      geom_hline(aes(yintercept  = Vw_true), linetype="dotted", color="red") +
-      facet_grid(Model ~ VI_true_string + variable_est) +
+      geom_hline(aes(yintercept  = value_true), linetype="dashed") +
+      facet_grid(Model ~ VI_true_string + variable_est, scales = "free_y") +
       scale_color_discrete(name = corr_label) +
+      # ylim(0, 1.2) +
       ylab("Variance value") + xlab("Among-individual variance in sampling") +
       theme_bw() + 
       theme(legend.position = "top",
@@ -61,16 +65,33 @@ f_variance_figs <- function(dat, param, path){
   # save figures
   ggsave(filename = file.path(path, "fig_sto_shared.png"),
          plot = p_sto_shared)
+  ggsave(filename = file.path(path, "fig_sto_shared.pdf"),
+         plot = p_sto_shared)
+  
+  
   ggsave(filename = file.path(path, "fig_lin_shared.png"),
          plot = p_lin_shared)
+  ggsave(filename = file.path(path, "fig_lin_shared.pdf"),
+         plot = p_lin_shared)
+  
   ggsave(filename = file.path(path, "fig_cyc_shared.png"),
+         plot = p_cyc_shared)
+  ggsave(filename = file.path(path, "fig_cyc_shared.pdf"),
          plot = p_cyc_shared)
   
   ggsave(filename = file.path(path, "fig_sto_unshared.png"),
          plot = p_sto_unshared)
+  ggsave(filename = file.path(path, "fig_sto_unshared.pdf"),
+         plot = p_sto_unshared)
+  
   ggsave(filename = file.path(path, "fig_lin_unshared.png"),
          plot = p_lin_unshared)
+  ggsave(filename = file.path(path, "fig_lin_unshared.pdf"),
+         plot = p_lin_unshared)
+  
   ggsave(filename = file.path(path, "fig_cyc_unshared.png"),
+         plot = p_cyc_unshared)
+  ggsave(filename = file.path(path, "fig_cyc_unshared.pdf"),
          plot = p_cyc_unshared)
   
   

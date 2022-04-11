@@ -1,5 +1,9 @@
 f_environment_figs <- function(path){
   
+  # path <- tar_read(out_path)
+  
+  ####
+  
   library(foreach)
   
   set.seed(50)
@@ -57,15 +61,22 @@ f_environment_figs <- function(path){
                      ifelse(X1_lin_state == TRUE  & X1_cyc_state == FALSE, "linear",
                      ifelse(X1_lin_state == FALSE & X1_cyc_state == TRUE,  "cyclic", NA_character_)))]
   
+  dat[ , Env_type := factor(Env_type, levels=c("stochastic", "linear", "cyclic"))]
+  dat[ , X1_sto_corr := factor(X1_sto_corr, levels=c("0", "0.8"), labels=c("rho = 0", "rho = 0.8"))]
+  
   p <- ggplot(data=dat) + 
         geom_line(aes(x=Time, y=X1)) +
         facet_grid(Env_type ~ X1_sto_corr) +
-        ylab("X") +
+        ylab("Environment (X)") +
         theme_bw()
   
   # save figures
   ggsave(filename = file.path(path, "fig_environments.png"),
-         plot     = p)
+         plot     = p,
+         width    = 4.5,
+         height   = 4.5
+         ,
+         units    = "in")
   
   return(p)
 }

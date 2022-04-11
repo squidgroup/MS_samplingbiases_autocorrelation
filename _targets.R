@@ -20,7 +20,6 @@ list(
   tar_target(s_sim_TRUE,           f_simulate_data(s_param_TRUE)),
   tar_target(s_sim_FALSE,          f_simulate_data(s_param_FALSE)),
   
-  
   #++++++++++++++++++++++++++++++++++++++
   ##### ANALYSIS ########################
   #++++++++++++++++++++++++++++++++++++++
@@ -29,15 +28,14 @@ list(
                                           "null",
                                           "Phenotype ~ 1 + (1|Individual)")),
 
-  
-  tar_target(a_time_ran,       f_fit_lmm(rbind(s_sim_TRUE, s_sim_FALSE),
-                                          "time_ran",
-                                          "Phenotype ~ 1 + (1|Individual) + (1|Time)")),
-
   tar_target(a_time_fix,       f_fit_lmm(rbind(s_sim_TRUE, s_sim_FALSE),
                                           "time_fix",
                                           "Phenotype ~ 1 + Time + (1|Individual)")),
-
+  
+  tar_target(a_time_ran,       f_fit_lmm(rbind(s_sim_TRUE, s_sim_FALSE),
+                                         "time_ran",
+                                         "Phenotype ~ 1 + (1|Individual) + (1|Time)")),
+  
   tar_target(a_time_ind,       f_fit_lmm(rbind(s_sim_TRUE, s_sim_FALSE),
                                           "time_ind",
                                           "Phenotype ~ 1 + (1|Individual) + (1|Time) + (1|Time:Individual)")),
@@ -58,12 +56,15 @@ list(
   
   tar_target(out_path,       "./output"),
   
-  # tar_target(r_var_figs,       f_variance_figs(data.table::rbindlist(list(a_null, 
-  #                                                                         a_time_ran, 
-  #                                                                         a_time_ind), 
-  #                                                                    fill=TRUE),
-  #                                              rbind(s_param_TRUE, s_param_FALSE),
-  #                                              out_path)),
+  tar_target(r_var_figs,       f_variance_figs(data.table::rbindlist(list(a_null,
+                                                                          a_time_ran,
+                                                                          a_time_fix,
+                                                                          a_time_ind,
+                                                                          a_ar1,
+                                                                          a_ar1_ind),
+                                                                     fill=TRUE),
+                                               rbind(s_param_TRUE, s_param_FALSE),
+                                               out_path)),
   
   tar_target(r_env_figs,       f_environment_figs(out_path)),
   

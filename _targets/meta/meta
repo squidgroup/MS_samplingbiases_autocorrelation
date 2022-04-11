@@ -6,24 +6,24 @@ f_fit_lmer|function|66bec41a3e484044||||||||||||||
 f_fit_nlme_ar1|function|c1f3d84cd44fff2f||||||||||||||
 f_variance_fig_null|function|354b163f89acac0f||||||||||||||
 f_fit_lmer_mc|function|4c0eb86645da9b15||||||||||||||
-r_var_figs|stem|e560a1d45654ed4c|9f733ffd94ee35a5|90ebdc07d8c5ab57|-485570799||t19090.6549492419s|300f739d0115a41e|1998978|rds|vector|||17.32|Removed 4500 rows containing missing values geom_hline.|
-out_path|stem|36be11501892156e|bd5ba7c252fadf11|ef46db3751d8e999|754978301||t19088.4162531819s|013d2ea9b87d37af|62|rds|vector|||0.97||
-END|stem|29e8fdf6c0df61d9|86f859fdccbf0387|ef46db3751d8e999|-1119972010||t19088.4162531471s|ba7baa2be0c9b1c9|50|rds|vector|||0.54||
-r_env_figs|stem|7cb37b71574028f1|f1d00a02b86e8790|663ba795bfe15a3a|-1910342860||t19088.4216246884s|3a87c4862233bf6a|72984|rds|vector|||1.54||
-s_param_TRUE|stem|1d4b3f8acca34efb|4e89e29a6de843db|da9a56d1ee7f83bb|-1116475045||t19093.5001448562s|360a945f07e28f33|1094|rds|vector|||0.34||
-s_param_FALSE|stem|78948707e60072b1|0e46d755a6bd683e|da9a56d1ee7f83bb|40395598||t19093.5001454196s|e3ddbc22b5f343b2|1108|rds|vector|||0.02||
-s_sim_TRUE|stem|086e5e4e2b43ffc3|385c351d30567548|1724737e0d47a203|-467485090||t19093.5003316638s|645a1864face21ee|3050345|rds|vector|||15.71|already exporting variables run_simulation|
-s_sim_FALSE|stem|b1ebf7ed80b8f684|9d1127f073996046|e5fd1bfb5c2b35af|331299796||t19093.5005523009s|09a602ec2cdad21b|3050307|rds|vector|||18.67|already exporting variables run_simulation|
-a_ar1_ind|stem|3b5cbeadbaf7bbbd|5d0290592de1b7cc|5dc0e804609ffea5|1978686581||t19093.5109179981s|80e4f33546216651|85046|rds|vector|||895.56|Model convergence problem nonpositivedefinite Hessian matrix. See vignettetroubleshooting|
-a_ar1|stem|a2cf5ab96e4a2bfb|33ac97a72eb4c3cc|5dc0e804609ffea5|765975871||t19093.5212234753s|dbfb1b63ba81178f|84762|rds|vector|||890.37|Model convergence problem nonpositivedefinite Hessian matrix. See vignettetroubleshooting|
-.Random.seed|object|b1d3895c4ecee228||||||||||||||
-f_variance_figs|function|090664e70821bd12||||||||||||||
-f_environment_figs|function|deac4753e4f8e142||||||||||||||
+out_path|stem|36be11501892156e|bd5ba7c252fadf11|ef46db3751d8e999|754978301||t19088.3841433716s|013d2ea9b87d37af|62|rds|vector|||0.97||
+s_param_FALSE|stem|78948707e60072b1|0e46d755a6bd683e|da9a56d1ee7f83bb|40395598||t19093.7493827412s|e3ddbc22b5f343b2|1108|rds|vector|||0.02||
+s_param_TRUE|stem|1d4b3f8acca34efb|4e89e29a6de843db|da9a56d1ee7f83bb|-1116475045||t19093.7493827528s|360a945f07e28f33|1094|rds|vector|||0.34||
+END|stem|29e8fdf6c0df61d9|86f859fdccbf0387|ef46db3751d8e999|-1119972010||t19088.2787599881s|ba7baa2be0c9b1c9|50|rds|vector|||0.54||
+s_sim_FALSE|stem|b1ebf7ed80b8f684|9d1127f073996046|e5fd1bfb5c2b35af|331299796||t19093.7493829028s|09a602ec2cdad21b|3050307|rds|vector|||18.67|already exporting variables run_simulation|
+s_sim_TRUE|stem|086e5e4e2b43ffc3|385c351d30567548|1724737e0d47a203|-467485090||t19093.7493830644s|645a1864face21ee|3050345|rds|vector|||15.71|already exporting variables run_simulation|
+a_ar1|stem|a2cf5ab96e4a2bfb|33ac97a72eb4c3cc|5dc0e804609ffea5|765975871||t19093.7493826604s|dbfb1b63ba81178f|84762|rds|vector|||890.37|Model convergence problem nonpositivedefinite Hessian matrix. See vignettetroubleshooting|
+a_ar1_ind|stem|3b5cbeadbaf7bbbd|5d0290592de1b7cc|5dc0e804609ffea5|1978686581||t19093.7493826719s|80e4f33546216651|85046|rds|vector|||895.56|Model convergence problem nonpositivedefinite Hessian matrix. See vignettetroubleshooting|
+a_null|stem|39a729eeb5d4e21f|6a4738ee01067d00|0c6d8c7a48add561|-230764264||t19093.7493826835s|4b05788be6efb9ce|56677|rds|vector|||136.97|Model failed to converge with maxgrad  0.00292369 tol  0.002, component 1|
+a_time_fix|stem|578cf6774d8fc254|71611c89f8c92cf5|0c6d8c7a48add561|404034102||t19093.749382695s|9fec5a4803fa622a|56572|rds|vector|||141.68|Model failed to converge with maxgrad  0.0022225 tol  0.002, component 1|
+a_time_ind|stem|b4b82515bf218109|c6fa907bc77ef27e|0c6d8c7a48add561|-1029442969||t19093.7493827066s|55bdee2a7e878f65|102007|rds|vector|||217.25|Model failed to converge with maxgrad  0.00403022 tol  0.002, component 1|
+a_time_ran|stem|4b5caa1d15f04917|9f1852c17e8cdd28|0c6d8c7a48add561|1873684555||t19093.7493827181s|7316bb4ea3898102|81781|rds|vector|||169.8|Model failed to converge with maxgrad  0.00312395 tol  0.002, component 1|
+.Random.seed|object|bd1bb1bbb4e9e943||||||||||||||
+f_variance_figs|function|ef29aca394e67d8f||||||||||||||
+f_environment_figs|function|c1a84e8d4e8c591a||||||||||||||
 f_fit_lmm|function|a22ec2d89181dcae||||||||||||||
 f_simulate_data|function|d9ee13315c52f5e7||||||||||||||
 f_fit_glmmTMB|function|2e5fe8dbadb5e324||||||||||||||
 f_init_sim_param|function|522747f911a2034c||||||||||||||
-a_time_fix|stem|578cf6774d8fc254|71611c89f8c92cf5|0c6d8c7a48add561|404034102||t19093.5712651858s|9fec5a4803fa622a|56572|rds|vector|||141.68|Model failed to converge with maxgrad  0.0022225 tol  0.002, component 1|
-a_time_ran|stem|4b5caa1d15f04917|9f1852c17e8cdd28|0c6d8c7a48add561|1873684555||t19093.5732305471s|7316bb4ea3898102|81781|rds|vector|||169.8|Model failed to converge with maxgrad  0.00312395 tol  0.002, component 1|
-a_null|stem|39a729eeb5d4e21f|6a4738ee01067d00|0c6d8c7a48add561|-230764264||t19093.5748161964s|4b05788be6efb9ce|56677|rds|vector|||136.97|Model failed to converge with maxgrad  0.00292369 tol  0.002, component 1|
-a_time_ind|stem|b4b82515bf218109|c6fa907bc77ef27e|0c6d8c7a48add561|-1029442969||t19093.5773309052s|55bdee2a7e878f65|102007|rds|vector|||217.25|Model failed to converge with maxgrad  0.00403022 tol  0.002, component 1|
+r_env_figs|stem|2d58d9ae2ab236a4|f1d00a02b86e8790|cfc28bd7e3f1d2e2|-1910342860||t19093.8317681138s|97bad5d945bc0171|72831|rds|vector|||1.45||
+r_var_figs|stem|2619cb96dfff9075|19da253b18389722|711412da83b0ce73|-485570799||t19093.8322878583s|d247cb11d416deb7|1653422|rds|vector|||44.41||
