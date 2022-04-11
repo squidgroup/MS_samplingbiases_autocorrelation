@@ -1,6 +1,6 @@
 f_simulate_data <- function(parameters){
   
-  # parameters <- tar_read(s_param_5_TRUE)
+  # parameters <- tar_read(s_param_TRUE)
   
   ########################
   ### load packages ######
@@ -40,7 +40,9 @@ f_simulate_data <- function(parameters){
     dt_sampled[ , c("e", "e2") := NULL]
     
     # Add simulation ids to data.frame
-    dt_sampled[ , Sim_id := inputs$Sim_id]
+    dt_sampled[ , Sim_id     := inputs$Sim_id]
+    dt_sampled[ , Replicate  := factor(Replicate)]
+    dt_sampled[ , Individual := factor(Individual)]
     
     return(dt_sampled)
   }

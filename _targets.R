@@ -25,39 +25,32 @@ list(
   ##### ANALYSIS ########################
   #++++++++++++++++++++++++++++++++++++++
   
-  tar_target(a_null,           f_fit_lmer(rbind(s_sim_TRUE, s_sim_FALSE),
+  tar_target(a_null,           f_fit_lmm(rbind(s_sim_TRUE, s_sim_FALSE),
                                           "null",
                                           "Phenotype ~ 1 + (1|Individual)")),
 
-  tar_target(a_time_ran,       f_fit_lmer(rbind(s_sim_TRUE, s_sim_FALSE),
+  
+  tar_target(a_time_ran,       f_fit_lmm(rbind(s_sim_TRUE, s_sim_FALSE),
                                           "time_ran",
                                           "Phenotype ~ 1 + (1|Individual) + (1|Time)")),
 
-  tar_target(a_time_ind,       f_fit_lmer(rbind(s_sim_TRUE, s_sim_FALSE),
+  tar_target(a_time_fix,       f_fit_lmm(rbind(s_sim_TRUE, s_sim_FALSE),
+                                          "time_fix",
+                                          "Phenotype ~ 1 + Time + (1|Individual)")),
+
+  tar_target(a_time_ind,       f_fit_lmm(rbind(s_sim_TRUE, s_sim_FALSE),
                                           "time_ind",
                                           "Phenotype ~ 1 + (1|Individual) + (1|Time) + (1|Time:Individual)")),
-  
 
   
+  tar_target(a_ar1,            f_fit_glmmTMB(rbind(s_sim_TRUE, s_sim_FALSE),
+                                         "ar1",
+                                         "Phenotype ~ 1 + (1|Individual) + ar1(Time+0|Replicate)")),
   
+  tar_target(a_ar1_ind,        f_fit_glmmTMB(rbind(s_sim_TRUE, s_sim_FALSE),
+                                         "ar1_ind",
+                                         "Phenotype ~ 1 + (1|Individual) + ar1(Time+0|Individual)")),
   
-  
-  
-  
-  # add time fixe + corAR1
-  
-  
-  
-  # tar_target(a_time_fix,       f_fit_lmer(rbind(s_sim_5_TRUE, s_sim_5_FALSE),
-  #                                         "time_fix",
-  #                                         "Phenotype ~ 1 + scale(Time) + (1|Individual)")),
-  # tar_target(a_time_fix_ran,   f_fit_lmer(rbind(s_sim_5_TRUE, s_sim_5_FALSE),
-  #                                         "time_fix_ran",
-  #                                         "Phenotype ~ 1 + scale(Time) + (1|Individual) + (1|Time)")),
-  
-  # tar_target(a_ar1,            f_fit_nlme_ar1(rbind(s_sim_5_TRUE, s_sim_5_FALSE),
-  #                                            "ar1",
-  #                                            "Phenotype ~ 1 + (1|Individual)")),
   
   #++++++++++++++++++++++++++++++++++++++
   ##### RESULTS #########################
@@ -65,12 +58,12 @@ list(
   
   tar_target(out_path,       "./output"),
   
-  tar_target(r_var_figs,       f_variance_figs(data.table::rbindlist(list(a_null, 
-                                                                          a_time_ran, 
-                                                                          a_time_ind), 
-                                                                     fill=TRUE),
-                                               rbind(s_param_TRUE, s_param_FALSE),
-                                               out_path)),
+  # tar_target(r_var_figs,       f_variance_figs(data.table::rbindlist(list(a_null, 
+  #                                                                         a_time_ran, 
+  #                                                                         a_time_ind), 
+  #                                                                    fill=TRUE),
+  #                                              rbind(s_param_TRUE, s_param_FALSE),
+  #                                              out_path)),
   
   tar_target(r_env_figs,       f_environment_figs(out_path)),
   
