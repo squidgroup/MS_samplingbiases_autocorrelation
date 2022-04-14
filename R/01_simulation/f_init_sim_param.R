@@ -1,6 +1,6 @@
-f_init_sim_param <- function(NI                   = 20,
-                             NP                   = 20,
-                             NR                   = 5,
+f_init_sim_param <- function(NI                   = 100,
+                             NP                   = 100,
+                             NR                   = 10,
                              Nrep                 = 2,
                              
                              VI                   = c(0, 0.4),

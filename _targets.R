@@ -1,5 +1,9 @@
 library(targets)
 library(tarchetypes)
+library(future)
+library(future.callr)
+
+plan(callr)
 
 source("R/functions.R") # loads functions
 
@@ -17,8 +21,27 @@ list(
   tar_target(s_param_TRUE,         f_init_sim_param(X1_sto_shared=TRUE)),
   tar_target(s_param_FALSE,        f_init_sim_param(X1_sto_shared=FALSE)),
  
-  tar_target(s_sim_TRUE,           f_simulate_data(s_param_TRUE)),
-  tar_target(s_sim_FALSE,          f_simulate_data(s_param_FALSE)),
+  tar_target(s_sim_TRUE,           f_simulate_data(s_param_TRUE),
+             format="fst_dt",
+             resources = tar_resources(
+               fst = tar_resources_fst(compress = 100)
+             )),
+  tar_target(s_sim_FALSE,          f_simulate_data(s_param_FALSE), 
+             format="fst_dt",
+             resources = tar_resources(
+               fst = tar_resources_fst(compress = 100)
+             )),
+  
+  ####
+  
+  tar_target(s_param_large_NR,     f_init_sim_param(Tmax=1000, NR=100, Nrep=1, VI=0.4, Vhsi=c(0, 0.4, 0.8), X1_sto_corr=c(0.8), 
+                                                    X1_lin_state=FALSE, X1_cyc_state=FALSE, X1_sto_shared=FALSE)),
+  
+  tar_target(s_sim_large_NR,       f_simulate_data(s_param_large_NR), 
+             format="fst_dt",
+             resources = tar_resources(
+               fst = tar_resources_fst(compress = 100)
+             )),
   
   #++++++++++++++++++++++++++++++++++++++
   ##### ANALYSIS ########################
@@ -26,28 +49,37 @@ list(
   
   tar_target(a_null,           f_fit_lmm(rbind(s_sim_TRUE, s_sim_FALSE),
                                           "null",
-                                          "Phenotype ~ 1 + (1|Individual)")),
+                                          "Phenotype ~ 1 + (1|Individual)",
+                                          fct="lmer")),
 
+  ##
+  
   tar_target(a_time_fix,       f_fit_lmm(rbind(s_sim_TRUE, s_sim_FALSE),
                                           "time_fix",
-                                          "Phenotype ~ 1 + Time + (1|Individual)")),
-  
+                                          "Phenotype ~ 1 + Time + (1|Individual)",
+                                          fct="lmer")),
+
   tar_target(a_time_ran,       f_fit_lmm(rbind(s_sim_TRUE, s_sim_FALSE),
                                          "time_ran",
-                                         "Phenotype ~ 1 + (1|Individual) + (1|Time)")),
-  
+                                         "Phenotype ~ 1 + (1|Individual) + (1|Time)",
+                                          fct="lmer")),
+
   tar_target(a_time_ind,       f_fit_lmm(rbind(s_sim_TRUE, s_sim_FALSE),
                                           "time_ind",
-                                          "Phenotype ~ 1 + (1|Individual) + (1|Time) + (1|Time:Individual)")),
+                                          "Phenotype ~ 1 + (1|Individual) + (1|Time) + (1|Time:Individual)",
+                                          fct="lmer")),
 
-  
-  tar_target(a_ar1,            f_fit_glmmTMB(rbind(s_sim_TRUE, s_sim_FALSE),
+  ##
+
+  tar_target(a_ar1,            f_fit_lmm(s_sim_TRUE,
                                          "ar1",
-                                         "Phenotype ~ 1 + (1|Individual) + ar1(Time+0|Replicate)")),
-  
-  tar_target(a_ar1_ind,        f_fit_glmmTMB(rbind(s_sim_TRUE, s_sim_FALSE),
+                                         "Phenotype ~ 1 + (1|Individual) + ar1(factor(Time)+0|Replicate)",
+                                          fct="glmmTMB")),
+
+  tar_target(a_ar1_ind,        f_fit_lmm(s_sim_FALSE,
                                          "ar1_ind",
-                                         "Phenotype ~ 1 + (1|Individual) + ar1(Time+0|Individual)")),
+                                         "Phenotype ~ 1 + (1|Individual) + ar1(factor(Time)+0|Individual)",
+                                          fct="glmmTMB")),
   
   
   #++++++++++++++++++++++++++++++++++++++

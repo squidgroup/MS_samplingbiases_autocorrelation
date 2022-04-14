@@ -44,7 +44,7 @@ f_variance_figs <- function(dat, param, path){
     ggplot(data = dt, aes(x=as.factor(Vhsi), y=value_est, color=as.factor(dt[[corr]]))) +
       geom_boxplot() + 
       geom_hline(aes(yintercept  = value_true), linetype="dashed") +
-      facet_grid(Model ~ VI_true_string + variable_est, scales = "free_y") +
+      facet_grid(Model ~ VI_true_string + variable_est) +
       scale_color_discrete(name = corr_label) +
       # ylim(0, 1.2) +
       ylab("Variance value") + xlab("Among-individual variance in sampling") +

@@ -2,6 +2,4 @@
 !.gitignore
 !meta
 !meta/meta
-!objects
-!objects/*
 

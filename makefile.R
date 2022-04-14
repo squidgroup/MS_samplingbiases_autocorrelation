@@ -9,7 +9,11 @@ library(tarchetypes)
 # tar_watch(seconds = 10, outdated = FALSE, targets_only = TRUE)
 
 tar_make()
-tar_meta(fields = error, complete_only = TRUE)
+
+tar_make_future(workers = 6)
+
+
+test <- tar_meta(fields = error, complete_only = TRUE)
 
 ### Check targets
 
