@@ -3,4 +3,5 @@
 .RData
 .Ruserdata
 .Rproj
-_targets/objects/
+
+writing/*

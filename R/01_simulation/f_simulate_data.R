@@ -35,10 +35,13 @@ f_simulate_data <- function(parameters){
     dt_sampled <- as.data.table(dt_list$sampled_data)[ , .(Phenotype, Replicate, Individual, Time, e)]
     
     # replicate samples per time and adjust residuals
-    dt_sampled <- dt_sampled[rep(1:.N, each=2)]
-    dt_sampled[ , Phenotype := Phenotype - e + rnorm(.N, 0, sqrt(inputs$Ve))]
-    dt_sampled[ , c("e", "e2") := NULL]
+    if(param$Nrep > 1){
+      dt_sampled <- dt_sampled[rep(1:.N, each=param$Nrep)]
+      dt_sampled[ , Phenotype := Phenotype - e + rnorm(.N, 0, sqrt(inputs$Ve))]
+    }
     
+    dt_sampled[ , e := NULL]
+
     # Add simulation ids to data.frame
     dt_sampled[ , Sim_id     := inputs$Sim_id]
     dt_sampled[ , Replicate  := factor(Replicate)]

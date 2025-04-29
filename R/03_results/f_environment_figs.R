@@ -6,6 +6,8 @@ f_environment_figs <- function(path){
   
   library(foreach)
   
+  #### example environmental effects
+  
   set.seed(50)
   path <- file.path(path, "manuscript", "figures")
   
@@ -62,21 +64,27 @@ f_environment_figs <- function(path){
                      ifelse(X1_lin_state == FALSE & X1_cyc_state == TRUE,  "cyclic", NA_character_)))]
   
   dat[ , Env_type := factor(Env_type, levels=c("stochastic", "linear", "cyclic"))]
-  dat[ , X1_sto_corr := factor(X1_sto_corr, levels=c("0", "0.8"), labels=c("rho = 0", "rho = 0.8"))]
+  dat[ , X1_sto_corr := factor(X1_sto_corr, levels=c("0", "0.8"), labels=c("rho == 0", "rho == 0.8"))]
   
-  p <- ggplot(data=dat) + 
+  (p <- ggplot(data=dat) + 
         geom_line(aes(x=Time, y=X1)) +
-        facet_grid(Env_type ~ X1_sto_corr) +
-        ylab("Environment (X)") +
-        theme_bw()
+        facet_grid(Env_type ~ X1_sto_corr, labeller = label_parsed) +
+        ylab("Environment value (x)") +
+        theme_bw())
   
   # save figures
   ggsave(filename = file.path(path, "fig_environments.png"),
          plot     = p,
-         width    = 4.5,
-         height   = 4.5
-         ,
+         width    = 6,
+         height   = 4,
          units    = "in")
+  
+  ggsave(filename = file.path(path, "fig_environments.pdf"),
+         plot     = p,
+         width    = 6,
+         height   = 4,
+         units    = "in", 
+         dpi      = 300)
   
   return(p)
 }

@@ -1,27 +1,25 @@
-f_fit_glmmTMB <- function(dat, mlabel, fformula){
+f_fit_lmer <- function(dat, mlabel, fformula){
   
-  # dat      <- tar_read(s_sim_FALSE)
-  # mlabel   <- "ar1_ind"
-  # fformula <- "Phenotype ~ 1 + (1|Individual) + ar1(factor(Time)+0|Replicate)"
-
+  # dat      <- rbind(tar_read(s_sim_TRUE), tar_read(s_sim_FALSE))
+  # mlabel   <- "time_ind"
+  # fformula <- "Phenotype ~ 1 + (1|Individual) + (1|Time) + (1|Time:Individual)"
+  
   ####
-  
-  library(glmmTMB)
 
-  # dat <- dat[Sim_id == "45_NR5_sharedFALSE" & Replicate %in% 7:10]
-  
+  library(lme4)
+
   fit_model <- function(dt){
     
-    # dt <- dat[Sim_id == "42_NR10_sharedFALSE" & Replicate == 1]
-    
-    fit  <- tryCatch(glmmTMB::glmmTMB(as.formula(fformula), data = dt),
+    # dt <- dat[Sim_id == unique(Sim_id)[1] & Replicate == 1]
+
+    fit  <- tryCatch(lme4::lmer(as.formula(fformula), data = dt),
             error = function(e){NULL})
     
     res <- data.frame("Sim_id"    = dt$Sim_id[1],
                       "Replicate" = dt$Replicate[1])
     
     if(!is.null(fit)){
-
+      
       vcov_m <- broom.mixed::tidy(fit)                  %>%
         filter(effect == "ran_pars")                    %>%
         mutate(term = gsub("factor|[.()[:digit:]]", '', 
@@ -35,15 +33,8 @@ f_fit_glmmTMB <- function(dat, mlabel, fformula){
         res[[vcov_m[i , term]]] <<- vcov_m[i , estimate]
       })
       
-      # check convergence
-      convergence <- fit$sdr$pdHess
+      res[["state"]] <- "ok"
       
-      if(convergence == TRUE){
-        res[["state"]] <- "ok"
-      }else{
-        res[["state"]] <- "not converged"
-      }
-        
     }else{
       res[["state"]] <- "error"
     }
