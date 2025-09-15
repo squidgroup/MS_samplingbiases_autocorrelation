@@ -63,7 +63,7 @@ f_variance_figs <- function(dat, param, path){
       facet_grid(Model ~ VI_true_string + variable_est, labeller = label_parsed) +
       scale_color_discrete(name = corr_label) +
       ylim(0, max(dat$value_est)+0.05) +
-      ylab("Variance value") + xlab(expression("Among-individual variance in sampling time ("~sigma[IS]^2*")")) +
+      ylab("Variance value") + xlab(expression("Repeatability in the timing of sampling ("~R[IS]^2*")")) +
       theme_bw() + 
       theme(legend.position = "top",
             strip.text.y    = element_text(size = 8),

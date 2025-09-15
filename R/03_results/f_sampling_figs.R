@@ -4,7 +4,7 @@ f_sampling_figs <- function(path){
   
   ####
   
-  library(foreach)
+  library("foreach")
   
   #### example sampling schemes
   
@@ -44,7 +44,7 @@ f_sampling_figs <- function(path){
   # combine simulated data with input parameters
   dat <- merge(dat, parm[ , .(Sim_id, Vhsi)], by="Sim_id")
   
-  dat[ , Vhsi := factor(Vhsi, labels = c("sigma[IS]^2 == 0", "sigma[IS]^2 == 0.4", "sigma[IS]^2 == 0.8"))]
+  dat[ , Vhsi := factor(Vhsi, labels = c("R[IS]^2 == 0", "R[IS]^2 == 0.4", "R[IS]^2 == 0.8"))]
   
   (p <- ggplot(data=dat) + 
         geom_line(aes(x=Time, y=Individual, group=Individual), color="grey") +

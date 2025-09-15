@@ -1,8 +1,8 @@
 source("R/packages/packages.R") # loads packages
 source("R/functions.R") # loads functions
 
-library(targets)
-library(tarchetypes)
+library("targets")
+library("tarchetypes")
 
 ### Run targets
 

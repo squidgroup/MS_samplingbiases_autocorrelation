@@ -14,7 +14,7 @@ f_variance_figs_all_large_NR <- function(dat, param, path){
       facet_grid(Model ~ VI_true_string + variable) +
       scale_color_discrete(name = corr_label) +
       # ylim(0, 1.2) +
-      ylab("Variance value") + xlab("Among-individual variance in sampling") +
+      ylab("Variance value") + xlab("Repeatability in the timing of sampling") +
       theme_bw() + 
       theme(legend.position = "top",
             strip.text.y    = element_text(size = 8),

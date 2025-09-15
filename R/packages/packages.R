@@ -1,4 +1,5 @@
 suppressPackageStartupMessages(library("targets"))
+suppressPackageStartupMessages(library("tarchetypes"))
 
 suppressPackageStartupMessages(library("dplyr", quietly = TRUE))
 suppressPackageStartupMessages(library("data.table", quietly = TRUE))
