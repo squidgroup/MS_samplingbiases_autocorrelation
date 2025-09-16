@@ -5,26 +5,9 @@ f_fit_lmer_id_period2|function|77887113e0ed3a4c||||||||||||||
 f_fit_nlme_ar1|function|c1f3d84cd44fff2f||||||||||||||
 f_variance_fig_null|function|354b163f89acac0f||||||||||||||
 f_fit_lmer_mc|function|4c0eb86645da9b15||||||||||||||
-out_path|stem|36be11501892156e|bd5ba7c252fadf11|ef46db3751d8e999|754978301||t19088.4162531819s|013d2ea9b87d37af|62|rds|vector|||0.97||
-END|stem|29e8fdf6c0df61d9|86f859fdccbf0387|ef46db3751d8e999|-1119972010||t19088.4162531471s|ba7baa2be0c9b1c9|50|rds|vector|||0.54||
 f_fit_lmm|function|d30813c9848269db||||||||||||||
 f_fit_lmm_old|function|a22ec2d89181dcae||||||||||||||
 .Random.seed|object|6a784275ac1a26d4||||||||||||||
-s_param_FALSE|stem|55e884d33d71e276|0e46d755a6bd683e|bff1aae187021bc0|40395598||t19099.5255988491s|5ae3a378da789a44|1103|rds|vector|||1.11||
-s_param_TRUE|stem|b876403b325c2951|4e89e29a6de843db|bff1aae187021bc0|-1116475045||t19099.5256000299s|f0af169ca06274a9|1087|rds|vector|||1.13||
-s_sim_TRUE|stem|8537877d6e8486fe|385c351d30567548|6735cf69f6871486|-467485090||t19099.5277657162s|6d67ecf30041cc8b|79718551|fst_dt|vector|||114.89|already exporting variables run_simulation|
-s_sim_FALSE|stem|eba92433dc9a2a2f|9d1127f073996046|042469be4770b6cc|331299796||t19099.5282674629s|fbed21b78ac4d6dc|79532328|fst_dt|vector|||198.12|already exporting variables run_simulation|
-a_null|stem|befb68cff44ed9ff|5cd1c2d2872d4138|21215e1b19ec7cdc|-230764264||t19099.5396209467s|2f80cba2b0af7651|274033|rds|vector|||923.81||
-a_time_fix|stem|9ed427bc2152918f|2fee282672546f87|21215e1b19ec7cdc|404034102||t19099.5399622374s|a0012c7f0d0e1bfc|273866|rds|vector|||937.26||
-a_time_ran|stem|e2bc2b9076f26126|8273dc1741d4f9b4|21215e1b19ec7cdc|1873684555||t19099.5456978679s|f16da7d72af9a105|395234|rds|vector|||1399.56|Model failed to converge with maxgrad  0.00245369 tol  0.002, component 1|
-a_time_ind|stem|86d4fcd1b6759481|4cd6813bb148ed3a|21215e1b19ec7cdc|-1029442969||t19099.5551275307s|590ada49e062b75f|492162|rds|vector|||2231.04|Model failed to converge with maxgrad  0.00533821 tol  0.002, component 1|
-a_ar1|stem|98778229675f16a9|d32d6e5c25f50907|a0a9a1a87ac1b60f|765975871||t19099.5859683891s|83ba37fa11fe7b9f|269658|rds|vector|||5001.31|Model convergence problem nonpositivedefinite Hessian matrix. See vignettetroubleshooting|
-a_ar1_ind|stem|7138749a1594c682|0266efd67d2d2f1e|8af1b6cd4d4cef1b|1978686581||t19099.7324231527s|81f58ef85f2fbb95|271304|rds|vector|||17613.29||
-s_param_large_NR|stem|ba600308fca7d2c9|709f3d874ec2f232|e0d5ef4cb5b1e634|-1738282487||t19114.556447179s|0623931e8fe849ed|672|rds|vector|||0.43||
-s_sim_large_NR|stem|2094957a856c907b|078d82b154b44751|236de15010de2a41|945887942||t19114.5753997655s|262d4dabbb5d5999|28476024|fst_dt|vector|||1634.78|already exporting variables run_simulation|
-a_ar1_ind_large_NR|stem|60654a5553e6a497|70df5036ade09f09|375c0a9102f77a6c|1804561251||t19114.7373032961s|9e263808d42dd598|10099|rds|vector|||13872.33|Model convergence problem false convergence 8. See vignettetroubleshooting|
-r_env_figs|stem|cdbab3ba80b49b13|f1d00a02b86e8790|386a15b0bdfc586a|-1910342860||t20032.9462283041s|e86d374c2c5c6a73|73858|rds|vector|||1.25||
-r_samp_figs|stem|2149c11520a00018|e3ae8799d5c390cb|0f36466416ef5383|-2074474293||t20208.4955532636s|77411de9a6e27110|64446|rds|vector|||1.09||
 f_sampling_figs|function|7de1d8165bff6754||||||||||||||
 f_variance_figs_all_large_NR|function|ddc14c9925dd62e6||||||||||||||
 f_variance_figs|function|c00f2b42efe73976||||||||||||||
@@ -34,6 +17,23 @@ f_fit_lmer|function|105b0ad5b069e685||||||||||||||
 f_simulate_data|function|627ed85dfbb26f1a||||||||||||||
 f_fit_glmmTMB|function|703d3dba60d752d4||||||||||||||
 f_init_sim_param|function|6133389f8e42d511||||||||||||||
-r_var_figs_alllarge_NR|stem|28a997e0a1affb48|0b30ec4ce0efa063|537e865574824930|-697763803||t20208.5021892953s|23085e0799fc8fd0|187403|rds|vector|||1.27||
-r_var_figs_all|stem|6ad5b46454805358|2088ade1889e1ff6|5356f3f445683be5|-122158049||t20208.5022505652s|68fa2c5bbd6e6b81|4392682|rds|vector|||4.28||
-r_var_figs|stem|29c8a3ec96f6be54|19da253b18389722|a345f100defe158a|-485570799||t20208.502815367s|75d9c53de94c144f|6317354|rds|vector|||50|Removed 300 rows containing missing values geom_text.|
+out_path|stem|36be11501892156e|bd5ba7c252fadf11|ef46db3751d8e999|754978301||t19088.41625s|013d2ea9b87d37af|62|rds|vector|||0.97||
+s_param_large_NR|stem|ba600308fca7d2c9|709f3d874ec2f232|e0d5ef4cb5b1e634|-1738282487||t19114.5564467593s|0623931e8fe849ed|672|rds|vector|||0.43||
+r_samp_figs|stem|2149c11520a00018|e3ae8799d5c390cb|0f36466416ef5383|-2074474293||t20208.4955439815s|77411de9a6e27110|64446|rds|vector|||1.09||
+r_env_figs|stem|cdbab3ba80b49b13|f1d00a02b86e8790|386a15b0bdfc586a|-1910342860||t20032.9462268519s|e86d374c2c5c6a73|73858|rds|vector|||1.25||
+s_sim_large_NR|stem|2094957a856c907b|078d82b154b44751|236de15010de2a41|945887942||t19114.5753935185s|262d4dabbb5d5999|28476024|fst_dt|vector|||1634.78|already exporting variables run_simulation|
+a_ar1_ind_large_NR|stem|60654a5553e6a497|70df5036ade09f09|375c0a9102f77a6c|1804561251||t19114.7373032407s|9e263808d42dd598|10099|rds|vector|||13872.33|Model convergence problem false convergence 8. See vignettetroubleshooting|
+r_var_figs_alllarge_NR|stem|28a997e0a1affb48|0b30ec4ce0efa063|537e865574824930|-697763803||t20208.5021875s|23085e0799fc8fd0|187403|rds|vector|||1.27||
+s_param_FALSE|stem|55e884d33d71e276|0e46d755a6bd683e|bff1aae187021bc0|40395598||t19099.5255902778s|5ae3a378da789a44|1103|rds|vector|||1.11||
+s_param_TRUE|stem|b876403b325c2951|4e89e29a6de843db|bff1aae187021bc0|-1116475045||t19099.5255902778s|f0af169ca06274a9|1087|rds|vector|||1.13||
+s_sim_FALSE|stem|eba92433dc9a2a2f|9d1127f073996046|042469be4770b6cc|331299796||t19099.5282638889s|fbed21b78ac4d6dc|79532328|fst_dt|vector|||198.12|already exporting variables run_simulation|
+a_ar1_ind|stem|7138749a1594c682|0266efd67d2d2f1e|8af1b6cd4d4cef1b|1978686581||t19099.7324189815s|81f58ef85f2fbb95|271304|rds|vector|||17613.29||
+s_sim_TRUE|stem|8537877d6e8486fe|385c351d30567548|6735cf69f6871486|-467485090||t19099.5277546296s|6d67ecf30041cc8b|79718551|fst_dt|vector|||114.89|already exporting variables run_simulation|
+a_ar1|stem|98778229675f16a9|d32d6e5c25f50907|a0a9a1a87ac1b60f|765975871||t19099.5859606481s|83ba37fa11fe7b9f|269658|rds|vector|||5001.31|Model convergence problem nonpositivedefinite Hessian matrix. See vignettetroubleshooting|
+a_null|stem|befb68cff44ed9ff|5cd1c2d2872d4138|21215e1b19ec7cdc|-230764264||t19099.5396180556s|2f80cba2b0af7651|274033|rds|vector|||923.81||
+a_time_fix|stem|9ed427bc2152918f|2fee282672546f87|21215e1b19ec7cdc|404034102||t19099.5399537037s|a0012c7f0d0e1bfc|273866|rds|vector|||937.26||
+a_time_ind|stem|86d4fcd1b6759481|4cd6813bb148ed3a|21215e1b19ec7cdc|-1029442969||t19099.5551273148s|590ada49e062b75f|492162|rds|vector|||2231.04|Model failed to converge with maxgrad  0.00533821 tol  0.002, component 1|
+a_time_ran|stem|e2bc2b9076f26126|8273dc1741d4f9b4|21215e1b19ec7cdc|1873684555||t19099.5456944444s|f16da7d72af9a105|395234|rds|vector|||1399.56|Model failed to converge with maxgrad  0.00245369 tol  0.002, component 1|
+r_var_figs|stem|29c8a3ec96f6be54|19da253b18389722|a345f100defe158a|-485570799||t20208.5028125s|75d9c53de94c144f|6317354|rds|vector|||50|Removed 300 rows containing missing values geom_text.|
+END|stem|29e8fdf6c0df61d9|86f859fdccbf0387|ef46db3751d8e999|-1119972010||t19088.41625s|ba7baa2be0c9b1c9|50|rds|vector|||0.54||
+r_var_figs_all|stem|6ad5b46454805358|2088ade1889e1ff6|5356f3f445683be5|-122158049||t20208.5022453704s|68fa2c5bbd6e6b81|4392682|rds|vector|||4.28||

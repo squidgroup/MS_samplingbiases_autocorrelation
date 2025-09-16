@@ -122,9 +122,9 @@ list(
                                                                   out_path)),
   
   
-  tar_target(r_env_figs,       f_environment_figs(out_path)),
+  tar_target(r_env_figs,  f_environment_figs(out_path)),
   
-  tar_target(r_samp_figs,      f_sampling_figs(out_path)),
+  tar_target(r_samp_figs, f_sampling_figs(out_path)),
   
   
   tar_target(END, 0)

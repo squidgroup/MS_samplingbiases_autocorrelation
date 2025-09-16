@@ -6,5 +6,4 @@ library("tarchetypes")
 
 ### Run targets
 
-# tar_make()
 tar_make_future(workers = 6)

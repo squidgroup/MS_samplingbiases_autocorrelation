@@ -1,0 +1,52 @@
+---
+title: "Code for Analysis"
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This code was used for the analysis of the paper:
+
+Denis et al. (2025) **Avoiding misleading estimates of among-individual variance caused by non-random sampling of individuals in a changeable environment**. Methods Ecol. Evol.
+
+## Getting Started
+
+To reproduce the analyses, follow these steps:
+
+1. Install R and Rtools
+ * [`R` 4.1.3](https://cran.r-project.org/bin/windows/base/old/)
+ * [`Rtools40`](https://cran.r-project.org/bin/windows/Rtools/) 
+
+2. Set up the reproducible environment
+
+Install the `{renv}` package (if not already installed)
+
+```{r eval=FALSE}
+install.packages("renv")
+```
+
+Then from the root of this project:
+```{r eval=FALSE}
+renv::restore()
+```
+
+This will install all required package dependencies as specified in the `renv.lock` file.
+
+3. Run the analysis
+
+Execute the main workflow by running:
+
+```{r eval=FALSE}
+source("run.R")
+```
+
+The pipeline is managed with the [`{targets}`](https://books.ropensci.org/targets/) package. This ensures analyses are fully reproducible and results are built following declared dependencies.
+
+## Notes
+
+* Ensure your working directory is set to the root of the project before running scripts.
+* All package versions are pinned via `{renv}` to guarantee reproducibility.
