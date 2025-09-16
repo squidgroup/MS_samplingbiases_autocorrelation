@@ -5,10 +5,6 @@ output:
     keep_md: true
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 This code was used for the analysis of the paper:
 
 Denis et al. (2025) **Avoiding misleading estimates of among-individual variance caused by non-random sampling of individuals in a changeable environment**. Methods Ecol. Evol.

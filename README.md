@@ -1,11 +1,4 @@
----
-title: "Code for Analysis"
-output:
-  html_document:
-    keep_md: true
----
-
-
+# Code for Analysis
 
 This code was used for the analysis of the paper:
 
